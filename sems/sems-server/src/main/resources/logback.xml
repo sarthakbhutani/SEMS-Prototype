@@ -1,0 +1,4 @@
+<configuration>
+
+<include resource="logback-main.xml"></include>
+</configuration>
