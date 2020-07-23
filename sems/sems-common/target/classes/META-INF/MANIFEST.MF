@@ -1,0 +1,11 @@
+Manifest-Version: 1.0
+Built-By: sanya
+Build-Jdk: 12.0.2
+Implementation-Title: sems-common
+Implementation-Version: 1.0.0
+Implementation-Vendor-Id: com.scgj
+Implementation-Vendor: Pivotal Software, Inc.
+Implementation-URL: http://projects.spring.io/spring-boot/sems/sems-comm
+ on/
+Created-By: Maven Integration for Eclipse
+
