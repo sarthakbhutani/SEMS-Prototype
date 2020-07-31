@@ -21,7 +21,7 @@ public class PasswordUtils {
 	}
 	
 	public static void main(String[] args) {
-		System.out.println(encrypt("snbSemS@@##@@","root"));
+		System.out.println(encrypt("1234","password"));
 	}
 	
 }

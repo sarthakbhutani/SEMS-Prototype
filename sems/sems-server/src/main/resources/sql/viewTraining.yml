@@ -1,0 +1,3 @@
+viewTrainingQuery:
+ getTrainingInfo: >
+  SELECT courses.course_img AS courseImg, courses.course_name AS courseName, courses.course_start_date AS courseStartDate, courses.course_end_date AS courseEndDate, courses.short_description AS shortDescription, courses.course_price AS coursePrice, instructors.instructor_name AS instructorName FROM courses INNER JOIN instructors on courses.instructor_id = instructors.instructor_id;
