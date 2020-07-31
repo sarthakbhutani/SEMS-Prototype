@@ -76,10 +76,10 @@
 <option value="" selected>Select Trainer</option>    <!--  DISABLED attribute? -->
 </select>
 
-{{selectedCourse.instructorName}}
+<p> here :{{selectedCourse.instructorName}}: {{tempVar}} </p>
     <div class="containerCourses">
         <!-- MAIN BOX COMING    ng-repeat-->
-        <div class="customThumbnail" ng-repeat="i in courseList ">      <!--  | trainerFilter : selectedCourse.instructorName -->
+        <div class="customThumbnail" ng-repeat="i in courseList | trainerFilter : selectedCourse.instructorName ">  
             <span class="trendingOverlay">Trending</span>
             <img ng-src="{{i.course}}" alt="thumbnail image" class="customThumbnailImg">
             <h3>{{i.courseName}}</h3>
