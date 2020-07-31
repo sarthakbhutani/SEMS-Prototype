@@ -15,7 +15,7 @@ public class ViewTrainingController {
 	@Autowired
 	ViewTrainingService viewTrainingService;
 	
-	@GetMapping("/vt")
+	@GetMapping("/getAllCourses")
 	public Collection<ViewTrainingDetailsDto> viewTrainingDetails(){
 		return viewTrainingService.viewTraining();
 	}

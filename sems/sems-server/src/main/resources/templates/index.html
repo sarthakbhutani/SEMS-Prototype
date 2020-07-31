@@ -10,6 +10,8 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   	<link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
     <link href="css/index.css" type="text/css" rel="stylesheet">
+    <link href="css/viewTraining.css" type="text/css" rel="stylesheet">
+    
     
       <!-- Export Library for UI Grids -->
     <script src="http://ui-grid.info/docs/grunt-scripts/csv.js"></script>
@@ -33,10 +35,73 @@
   	
   	
   	<!-- Controllers -->
-    <script type="text/javascript" src="js/controllers/indexController.js"></script> 
+    <script type="text/javascript" src="js/controllers/indexController.js"></script>
+    <script type="text/javascript" src="js/controllers/viewTrainingController.js"></script>
 </head>
 
 <body>
 	<h1>Index Page</h1>
+	
+	    <!-- NAV : to be detached -->
+    <div class=container">
+        <nav class="row">
+            <img src="snb_logo.png" id="logo" class="col-md-2 col-lg-2" alt="Smalt & Beryl Logo">
+            <div class="col-md-6 col-lg-8"></div>
+            <a href="#" class="navItem col-md-1 col-lg-1"><span class="icon glyphicon glyphicon-home"
+                    aria-hidden="true"></span>Home</a>
+            <a href="#" class="navItem col-md-1 col-lg-1"><span class="glyphicon glyphicon-user"
+                    aria-hidden="true"></span>My Profile</a>
+        </nav>
+    </div>
+    
+<div ng-controller="viewTrainingController">
+    <div class=" carousel slide" data-ride="carousel" id="myCarousel">
+        <div class="carousel-inner" role="listbox">
+            <div class="item active">
+                <img src="carousel1.PNG" alt="Smalt & Beryl Portal carousel" class="carouselImg">
+                <button class="getStartedBtn">Get Started</button>
+            </div>
+        </div>
+    </div>
+
+    <br>
+    <div>
+        <h3 id="upcomingTrainingH3">Upcoming Trainings ({{total_courses}})</h3>
+        <hr id="break">
+    </div>
+
+<!-- Filters -->
+
+<select ng-model="selectedCourse" class="Filter Trainer" ng-options="i.instructorName for i in courseList">
+<option value="" selected>Select Trainer</option>    <!--  DISABLED attribute? -->
+</select>
+
+{{selectedCourse.instructorName}}
+    <div class="containerCourses">
+        <!-- MAIN BOX COMING    ng-repeat-->
+        <div class="customThumbnail" ng-repeat="i in courseList ">      <!--  | trainerFilter : selectedCourse.instructorName -->
+            <span class="trendingOverlay">Trending</span>
+            <img ng-src="{{i.course}}" alt="thumbnail image" class="customThumbnailImg">
+            <h3>{{i.courseName}}</h3>
+            <h5>{{i.instructorName}}, {{i.courseStartDate}} - {{i.courseEndDate}} </h4>
+                <h5>{{i.shortDescription}}</h5>
+                <h3>{{i.coursePrice}} </h3>
+                <p class="row">
+                <div class="col-md-8">
+                    <a href="#" class="btn btn-primary" id="viewDetailsBtn" role="button">View Details</a>
+                </div>
+                <div class="col-md-4">
+                    <a href="#" class="btn btn-success col-md-3" id="enrolBtn" role="button">Enrol</a>
+                </div>
+                </p>
+        </div>
+    </div>
+    
+    
+<!-- MODAL BOX -->
+<!-- UI GRID -->
+    <div id="grid1" ui-grid="{ data: courseList }" class="grid" ui-grid-auto-resize></div>
+</div>
+
 </body>
 </html>

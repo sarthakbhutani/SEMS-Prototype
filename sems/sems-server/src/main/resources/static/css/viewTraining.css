@@ -1,0 +1,85 @@
+*, *:before, *:after {
+    box-sizing: border-box;
+  }
+
+#logo{
+    width: 9%;
+    margin: 1rem;
+  }
+
+.navItem{
+    margin: 2rem;
+  }
+
+.container{
+  height : 10%;
+}
+
+.left-send{
+  text-align: left;
+}
+
+.getStartedBtn{
+    position: absolute;
+    left: 6rem;
+    top: 22rem;
+}
+
+.carouselImg{
+  position: relative;
+  width: 192rem;
+}
+
+#break{
+  margin-top: 0%;
+  border-top: 1px solid black;
+}
+
+#upcomingTrainingH3{
+  margin-left: 4%;
+  margin-bottom: 0%;
+}
+
+.containerCourses{
+  display: flex;
+  justify-content: flex-start;
+  /* width: 20%; */
+  flex-wrap: wrap;
+}
+
+.customThumbnail{
+  padding: 1rem;
+  box-shadow: 1px 1px #888888;
+  background-color: #fff;
+  border: 2px solid darkgrey;  
+  width: 20%;
+  margin-left: 4%;
+  position: relative;
+}
+.trendingOverlay{
+    background-color: #ff8303;
+    position: absolute;
+    left: 0rem;
+}
+.customThumbnailImg{
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+#enrolBtn{
+  width: 100%;
+  margin-left: 1rem;
+}
+
+#viewDetailsBtn{
+  margin -left: -1rem;
+}
+
+
+/*
+.myGrid {
+    width: 500px;
+    height: 250px;
+  }
+  */
