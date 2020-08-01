@@ -40,47 +40,59 @@
 </head>
 
 <body>
-	<h1>Index Page</h1>
 	
 	    <!-- NAV : to be detached -->
     <div class=container">
         <nav class="row">
-            <img src="../static/images/snb_logo.png" id="logo" class="col-md-2 col-lg-2" alt="Smalt & Beryl Logo">
+            <img src="images/snb_logo.png" id="logo" class="col-md-2 col-lg-2" alt="Smalt & Beryl Logo">
             <div class="col-md-6 col-lg-8"></div>
             <a href="#" class="navItem col-md-1 col-lg-1"><span class="icon glyphicon glyphicon-home"
                     aria-hidden="true"></span>Home</a>
             <a href="#" class="navItem col-md-1 col-lg-1"><span class="glyphicon glyphicon-user"
-                    aria-hidden="true"></span>My Profile</a>
+                    aria-hidden="true"></span>My Profile</a>  
         </nav>
+        <hr class="navBreak"/>
     </div>
     
 <div ng-controller="viewTrainingController">
     <div class=" carousel slide" data-ride="carousel" id="myCarousel">
         <div class="carousel-inner" role="listbox">
             <div class="item active">
-                <img src="carousel1.PNG" alt="Smalt & Beryl Portal carousel" class="carouselImg">
-                <button class="getStartedBtn">Get Started</button>
+                <img src="images/carousel_img.jpg" alt="Smalt & Beryl Portal carousel" class="carouselImg">
+                <h2 class="carouselData">SNB's E-Learning Management Portal</h2>
+                <h3 class="carouselData">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Adipiscing at in tellus integer feugiat scelerisque varius.</h3>
+                <button class="getStartedBtn carouselData">Get Started</button>
+                
             </div>
         </div>
     </div>
 
     <br>
     <div>
-        <h3 id="upcomingTrainingH3">Upcoming Trainings ({{total_courses}})</h3>
+        <h3 id="upcomingTrainingH3">Upcoming Trainings ({{courseList.length}})</h3>
         <hr id="break">
     </div>
 
 <!-- Filters -->
-
-<select ng-model="selectedCourse" class="Filter Trainer" ng-options="i.instructorName for i in courseList">
+<div class=row>
+<div class="col-md-8 col-lg-8"></div>
+<div class="col-md-2 col-lg-2">
+<select ng-model="selectedCategory" class="filter category">
+<option value="" selected disabled> Select Category </option>
+</select>
+</div>
+<div class="col-md-2 col-lg-2">
+<select ng-model="selectedCourse" class="filter trainer col-md-2 col-lg-2" ng-options="i.instructorName for i in courseList">
 <option value="" selected>Select Trainer</option>    <!--  DISABLED attribute? -->
 </select>
+</div>
+</div>
 
     <div class="containerCourses">
         <!-- MAIN BOX COMING    ng-repeat-->
         <div class="customThumbnail" ng-repeat="i in courseList | trainerFilter : selectedCourse.instructorName ">  
             <span class="trendingOverlay">Trending</span>
-            <img ng-src="{{i.course}}" alt="thumbnail image" class="customThumbnailImg">
+            <img ng-src="{{i.courseImg}}" alt="thumbnail image" class="customThumbnailImg">
             <h3>{{i.courseName}}</h3>
             <h5>{{i.instructorName}}, {{i.courseStartDate}} - {{i.courseEndDate}} </h4>
                 <h5>{{i.shortDescription}}</h5>
@@ -88,6 +100,7 @@
                 <p class="row">
                 <div class="col-md-8">
                     <a href="#" ng-click="populateModal(i.courseId,courseList)" class="btn btn-primary" id="viewDetailsBtn" role="button" data-toggle="modal" data-target="#myModal">View Details</a>
+                </div>
                 <div class="col-md-4">
                     <a href="#" class="btn btn-success col-md-3" id="enrolBtn" role="button">Enrol</a>
                 </div>

@@ -9,8 +9,18 @@
 
 .navItem{
     margin: 2rem;
+    color: black;
+    font-weight: bold;
   }
 
+.navItem > span{
+	padding-right: 0.7rem;
+}
+
+.navBreak{
+    border-top: 1px solid #d7d2d2;
+    margin : 0rem;	
+}
 .container{
   height : 10%;
   width : 100%;
@@ -20,15 +30,35 @@
   text-align: left;
 }
 
-.getStartedBtn{
+.carouselData{
     position: absolute;
-    left: 6rem;
+    left: 4rem;
+}
+
+button.carouselData{
     top: 22rem;
+    padding: 0.5rem 5rem;
+    border-radius: 0.7rem;
+    background-color: #640464;
+    color: white;
+    font-size: 1.7rem;
+}
+
+h2.carouselData{
+	top: 4rem;
+    font-weight: bold;
+}
+
+h3.carouselData{
+    top: 10rem;
+    width: 100rem;
 }
 
 .carouselImg{
   position: relative;
-  width: 192rem;
+  max-height: 34rem;
+    width: auto;
+    margin-left: 118rem;
 }
 
 #break{
@@ -39,6 +69,7 @@
 #upcomingTrainingH3{
   margin-left: 4%;
   margin-bottom: 0%;
+  font-weight : bold;
 }
 
 .containerCourses{
@@ -58,9 +89,12 @@
   position: relative;
 }
 .trendingOverlay{
-    background-color: #ff8303;
+    background-color: #e96100;
     position: absolute;
     left: 0rem;
+    color: white;
+    width: 10rem;
+    padding: 0.7rem 2rem;
 }
 .customThumbnailImg{
   display: block;
@@ -77,6 +111,29 @@
   margin -left: -1rem;
 }
 
+.bold{
+	font-weight: 600;
+}
+
+.blue{
+	color : blue;
+}
+
+.bold > span {
+	font-weight : 100;
+}
+
+.filter{
+	padding: 0.6rem;
+    border-radius: 0.7rem;
+    font-size: 1.5rem;
+    border: 1px solid black;
+    margin-bottom: 2rem;
+}
+
+.trainer{
+	width: 15rem;
+}
 
 /*
 .myGrid {

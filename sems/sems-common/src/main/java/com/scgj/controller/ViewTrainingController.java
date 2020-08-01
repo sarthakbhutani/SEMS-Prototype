@@ -26,4 +26,5 @@ public class ViewTrainingController {
 	public Collection<ViewTrainingSessionDetailsDto> viewTrainingSessionDetailsController(@RequestParam int courseId){
 		return viewTrainingService.viewTrainingSessionDetailsByIdService(courseId);
 	}
+	
 }

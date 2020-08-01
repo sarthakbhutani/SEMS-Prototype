@@ -38,9 +38,18 @@ myApp.controller("viewTrainingController", function($scope,$http){
 	$scope.populateModal= function(courseId,courselist){ 
 		
 		console.log("in FE : populateModal() with courseId" + courseId);
-		console.log(courseId);
-		console.log(courselist);
-		
+	
+		$http.get("/getCourseSession?courseId="+courseId).then(function(response){
+			 if (response.data == null) {
+			      $scope.errorMsg = "couldn't load data";
+			    } else {
+			    	//populate ui-grid
+			    	$scope.errorMsg = "Loading data : takes time to fill the grid";
+			      sessionDetails = response.data;
+			      console.log(sessionDetails);
+			      $scope.sessionTableData = sessionDetails;
+			    }
+			 
 		var courseName, longDescription, presentationStartDate, presentationEndDate, assesmentDate, coursePrice;
 		for(i of courselist){
 		    if(i.courseId === courseId){
@@ -64,19 +73,6 @@ myApp.controller("viewTrainingController", function($scope,$http){
 		        assesmentDate : assesmentDate,
 		        coursePrice : coursePrice
 		}
-	
-		
-		$http.get("/getCourseSession?courseId="+courseId).then(function(response){
-			 if (response.data == null) {
-			      $scope.errorMsg = "couldn't load data";
-			    } else {
-			    	//populate ui-grid
-			    	$scope.errorMsg = "LOADING data";
-			      sessionDetails = response.data;
-			      console.log(sessionDetails);
-			      $scope.sessionTableData = sessionDetails;
-//			     fill $scope.sessionTableData
-			    }
 		});
 		
 	}
