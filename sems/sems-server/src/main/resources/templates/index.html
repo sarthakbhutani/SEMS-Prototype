@@ -112,10 +112,11 @@
                     <p class="bold"> Assesment Date - <span> {{modalSessionData.assesmentDate}} </span> </p>
                     <p class="bold"> Cost - <span> {{modalSessionData.coursePrice}} </span> </p>
                     <br>
-                    <h2 class="modalHeader">Session Information</h2>
+                    <h3 class="blue">Session Information</h3>
                 </div>
                 <!-- UI GRID -->
                 <div id="grid1" ui-grid="{ data: sessionTableData }" class="grid" ui-grid-auto-resize></div>
+                <span>{{errorMsg}}</span>
             </div>
         </div>
     </div>

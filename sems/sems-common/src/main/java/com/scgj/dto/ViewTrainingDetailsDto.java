@@ -19,7 +19,6 @@ public class ViewTrainingDetailsDto extends BaseDto{
 	}
 	public ViewTrainingDetailsDto(int courseId, String courseImg, String courseName, String instructorName,
 			String courseStartDate, String courseEndDate, String shortDescription, int coursePrice, String longDescription, String assesmentDate) {
-		// TODO Auto-generated constructor stub
 		super();
 		this.courseId=courseId;
 		this.courseImg = courseImg;

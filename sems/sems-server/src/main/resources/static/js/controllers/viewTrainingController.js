@@ -66,10 +66,18 @@ myApp.controller("viewTrainingController", function($scope,$http){
 		}
 	
 		
-//		$http.get("/getCourseById?courseId="+$index.courseId).then(function(response){
-//			// Populate Modal Box Details & Show it
-//			
-//		});
+		$http.get("/getCourseSession?courseId="+courseId).then(function(response){
+			 if (response.data == null) {
+			      $scope.errorMsg = "couldn't load data";
+			    } else {
+			    	//populate ui-grid
+			    	$scope.errorMsg = "LOADING data";
+			      sessionDetails = response.data;
+			      console.log(sessionDetails);
+			      $scope.sessionTableData = sessionDetails;
+//			     fill $scope.sessionTableData
+			    }
+		});
 		
 	}
 	

@@ -15,12 +15,18 @@ import org.springframework.stereotype.Component;
 public class ViewTrainingConfig {
 
 	private String TrainingInfo;
-
+	private String TrainingSessionInfoById;
 	public String getTrainingInfo() {
 		return TrainingInfo;
 	}
-
-	public void setGetTrainingInfo(String TrainingInfo) {
-		this.TrainingInfo = TrainingInfo;
+	public void setTrainingInfo(String trainingInfo) {
+		TrainingInfo = trainingInfo;
 	}
+	public String getTrainingSessionInfoById() {
+		return TrainingSessionInfoById;
+	}
+	public void setTrainingSessionInfoById(String trainingSessionInfoById) {
+		TrainingSessionInfoById = trainingSessionInfoById;
+	}
+
 }
