@@ -32,7 +32,8 @@ CREATE TABLE `courses` (
   `long_description` varchar(500) DEFAULT NULL,
   `assesment_date` datetime NOT NULL,
   `instructor_id` int DEFAULT NULL,
-  `courses_img` varchar(200) DEFAULT NULL,
+  `course_img` varchar(200) DEFAULT NULL,
+  `course_category` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`course_id`),
   KEY `instructor_id_idx` (`instructor_id`),
   CONSTRAINT `instructor_id` FOREIGN KEY (`instructor_id`) REFERENCES `instructors` (`instructor_id`) ON DELETE SET NULL
@@ -45,7 +46,7 @@ CREATE TABLE `courses` (
 
 LOCK TABLES `courses` WRITE;
 /*!40000 ALTER TABLE `courses` DISABLE KEYS */;
-INSERT INTO `courses` VALUES (1,'Practical Guide to Web Development','2020-06-25','2020-07-01',1500,'Get a Full Understanding of the Web','Get a Full Understanding of the Web','2020-06-30 00:00:00',1,'https://sems-prototype.s3.ap-south-1.amazonaws.com/course-photos/html5.jpg'),(2,'Web Development From Scratch','2020-06-22','2020-06-30',1200,'Techniques, principles and methodologies used','Techniques, principles and methodologies used','2020-06-29 00:00:00',2,'https://sems-prototype.s3.ap-south-1.amazonaws.com/course-photos/html5.jpg'),(3,'Learn HTML5 Programming','2020-06-25','2020-06-30',500,'A beginner’s guide to learn HTML5','A beginner’s guide to learn HTML5','2020-06-29 00:00:00',3,'https://sems-prototype.s3.ap-south-1.amazonaws.com/course-photos/html5.jpg'),(4,'Web Design for Beginners','2020-06-18','2020-06-21',800,'Web Design for Beginners: Real World Coding in','Web Design for Beginners: Real World Coding in','2020-06-20 00:00:00',4,'https://sems-prototype.s3.ap-south-1.amazonaws.com/course-photos/html5.jpg');
+INSERT INTO `courses` VALUES (1,'Practical Guide to Web Development','2020-06-25','2020-07-01',1500,'Get a Full Understanding of the Web Development Process & Technologies','Get a Full Understanding of the Web Development Process & Technologies','2020-06-30 00:00:00',1,'https://sems-prototype.s3.ap-south-1.amazonaws.com/course-photos/html5.jpg','HTML, CSS, Javascript, Java, Web Design'),(2,'Web Development From Scratch','2020-06-22','2020-06-30',1200,'Techniques, principles and methodologies used to learn web development','Techniques, principles and methodologies used to learn web development','2020-06-29 00:00:00',2,'https://sems-prototype.s3.ap-south-1.amazonaws.com/course-photos/html5.jpg','HTML, CSS, Javascript, Web Design'),(3,'Learn HTML5 Programming','2020-06-25','2020-06-30',500,'A beginner’s guide to learn HTML5','A beginner’s guide to learn HTML5','2020-06-29 00:00:00',3,'https://sems-prototype.s3.ap-south-1.amazonaws.com/course-photos/html5.jpg','HTML'),(4,'Web Design for Beginners','2020-06-18','2020-06-21',800,'Web Design for Beginners: Real World Coding in HTML & CSS','Web Design for Beginners: Real World Coding in HTML & CSS','2020-06-20 00:00:00',4,'https://sems-prototype.s3.ap-south-1.amazonaws.com/course-photos/html5.jpg','HTML, CSS, Web Design');
 /*!40000 ALTER TABLE `courses` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -114,4 +115,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-07-30 21:18:24
+-- Dump completed on 2020-08-01 12:55:04
