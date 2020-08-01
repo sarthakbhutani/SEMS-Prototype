@@ -2,14 +2,14 @@ var myApp = angular.module('app');
 
 myApp.filter("trainerFilter",function(){
 	return function(courseList,selectedInstructor){
-		console.log("courseList" + courseList[0].instructorName + " selectedInstructor" + selectedInstructor + "typeof" +typeof selectedInstructor);
+//		console.log("courseList" + courseList[0].instructorName + " selectedInstructor" + selectedInstructor + "typeof" +typeof selectedInstructor);
 		let output = [];
 		if(selectedInstructor=="" || typeof selectedInstructor === "undefined" || selectedInstructor==undefined || selectedInstructor == null){
 			output = courseList;
-			console.log('emptyLot');
+//			console.log('emptyLot');
 		}
 		else{
-			console.log("filledLot"+selectedInstructor);
+//			console.log("filledLot"+selectedInstructor);
 			output=[];
 			angular.forEach(courseList, function(value,key){
 				if(value.instructorName==selectedInstructor){
@@ -32,16 +32,48 @@ myApp.controller("viewTrainingController", function($scope,$http){
 	console.log($scope.courseList);
 	//then closed here
 	
+	
+	
 	//ng-click trigger
-	function getCourseByIndex($index){ //		by $index FOR EASE
-		$http.get("/getCourseById?courseId="+$index.courseId).then(function(response){
-			// Populate Modal Box Details & Show it
-			
-		});
+	$scope.populateModal= function(courseId,courselist){ 
+		
+		console.log("in FE : populateModal() with courseId" + courseId);
+		console.log(courseId);
+		console.log(courselist);
+		
+		var courseName, longDescription, presentationStartDate, presentationEndDate, assesmentDate, coursePrice;
+		for(i of courselist){
+		    if(i.courseId === courseId){
+		    	courseName = i.courseName;
+		        longDescription= i.longDescription;
+		        presentationStartDate = i.courseStartDate;
+		        presentationEndDate = i.courseEndDate;
+		        assesmentDate = i.assesmentDate;
+		        coursePrice = i.coursePrice;
+		    }
+		};
+		
+		console.log("name"+courseName);
+		
+		$scope.modalSessionData={
+		        courseId : courseId,
+		        courseName : courseName,
+		        longDescription: longDescription,
+		        presentationStartDate : presentationStartDate,
+		        presentationEndDate : presentationEndDate,
+		        assesmentDate : assesmentDate,
+		        coursePrice : coursePrice
+		}
+	
+		
+//		$http.get("/getCourseById?courseId="+$index.courseId).then(function(response){
+//			// Populate Modal Box Details & Show it
+//			
+//		});
 		
 	}
 	
-//	ui-grid properties : remove table names
+//	ui-grid properties : remove table names 
 	
 });
 

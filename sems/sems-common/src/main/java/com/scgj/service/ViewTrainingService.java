@@ -15,7 +15,6 @@ public class ViewTrainingService {
 	ViewTrainingDao viewTrainingDao;
 
 	public Collection<ViewTrainingDetailsDto> viewTraining(){
-		System.out.println("in here -1");
 		return viewTrainingDao.getTrainingDao();
 	}
 }

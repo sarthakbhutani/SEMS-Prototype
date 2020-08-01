@@ -10,14 +10,18 @@ public class ViewTrainingDetailsDto extends BaseDto{
 	  private String courseEndDate;
 	  private String shortDescription;
 	  private int coursePrice;
+	  private int courseId;
+	  private String longDescription;
+	  private String assesmentDate;
 	  
 	public ViewTrainingDetailsDto() {
 		super();
 	}
-	public ViewTrainingDetailsDto(String courseImg, String courseName, String instructorName,
-			String courseStartDate, String courseEndDate, String shortDescription, int coursePrice) {
+	public ViewTrainingDetailsDto(int courseId, String courseImg, String courseName, String instructorName,
+			String courseStartDate, String courseEndDate, String shortDescription, int coursePrice, String longDescription, String assesmentDate) {
 		// TODO Auto-generated constructor stub
-		super(); //			WHY THO?
+		super();
+		this.courseId=courseId;
 		this.courseImg = courseImg;
 		this.courseName = courseName;
 		this.instructorName = instructorName;
@@ -25,6 +29,8 @@ public class ViewTrainingDetailsDto extends BaseDto{
 		this.courseEndDate = courseEndDate;
 		this.shortDescription = shortDescription;
 		this.coursePrice = coursePrice;
+		this.longDescription=longDescription;
+		this.assesmentDate=assesmentDate;
 	}
 	public String getCourseImg() {
 		return courseImg;
@@ -67,5 +73,23 @@ public class ViewTrainingDetailsDto extends BaseDto{
 	}
 	public void setCoursePrice(int coursePrice) {
 		this.coursePrice = coursePrice;
+	}
+	public int getCourseId() {
+		return courseId;
+	}
+	public void setCourseId(int courseId) {
+		this.courseId = courseId;
+	}
+	public String getLongDescription() {
+		return longDescription;
+	}
+	public void setLongDescription(String longDescription) {
+		this.longDescription = longDescription;
+	}
+	public String getAssesmentDate() {
+		return assesmentDate;
+	}
+	public void setAssesmentDate(String assesmentDate) {
+		this.assesmentDate = assesmentDate;
 	}
 }

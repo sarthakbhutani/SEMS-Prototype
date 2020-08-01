@@ -45,7 +45,7 @@
 	    <!-- NAV : to be detached -->
     <div class=container">
         <nav class="row">
-            <img src="snb_logo.png" id="logo" class="col-md-2 col-lg-2" alt="Smalt & Beryl Logo">
+            <img src="../static/images/snb_logo.png" id="logo" class="col-md-2 col-lg-2" alt="Smalt & Beryl Logo">
             <div class="col-md-6 col-lg-8"></div>
             <a href="#" class="navItem col-md-1 col-lg-1"><span class="icon glyphicon glyphicon-home"
                     aria-hidden="true"></span>Home</a>
@@ -76,7 +76,6 @@
 <option value="" selected>Select Trainer</option>    <!--  DISABLED attribute? -->
 </select>
 
-<p> here :{{selectedCourse.instructorName}}: {{tempVar}} </p>
     <div class="containerCourses">
         <!-- MAIN BOX COMING    ng-repeat-->
         <div class="customThumbnail" ng-repeat="i in courseList | trainerFilter : selectedCourse.instructorName ">  
@@ -85,11 +84,10 @@
             <h3>{{i.courseName}}</h3>
             <h5>{{i.instructorName}}, {{i.courseStartDate}} - {{i.courseEndDate}} </h4>
                 <h5>{{i.shortDescription}}</h5>
-                <h3>{{i.coursePrice}} </h3>
+                <h3><img src="https://img.icons8.com/windows/32/000000/rupee.png"/> {{i.coursePrice}} </h3>
                 <p class="row">
                 <div class="col-md-8">
-                    <a href="#" class="btn btn-primary" id="viewDetailsBtn" role="button">View Details</a>
-                </div>
+                    <a href="#" ng-click="populateModal(i.courseId,courseList)" class="btn btn-primary" id="viewDetailsBtn" role="button" data-toggle="modal" data-target="#myModal">View Details</a>
                 <div class="col-md-4">
                     <a href="#" class="btn btn-success col-md-3" id="enrolBtn" role="button">Enrol</a>
                 </div>
@@ -99,8 +97,28 @@
     
     
 <!-- MODAL BOX -->
-<!-- UI GRID -->
-    <div id="grid1" ui-grid="{ data: courseList }" class="grid" ui-grid-auto-resize></div>
+<div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <!-- DATA HERE -->
+                <div class="modalHeader">
+                    <h3 class="blue">{{modalSessionData.courseName}}</h3>
+                    <p class="bold"> Description - <span> {{modalSessionData.longDescription}} </span> </p>
+                    <p class="bold"> Training Duration - <span> {{modalSessionData.presentationStartDate}} to
+                            {{modalSessionData.presentationEndDate}} </span> </p>
+                    <p class="bold"> Assesment Date - <span> {{modalSessionData.assesmentDate}} </span> </p>
+                    <p class="bold"> Cost - <span> {{modalSessionData.coursePrice}} </span> </p>
+                    <br>
+                    <h2 class="modalHeader">Session Information</h2>
+                </div>
+                <!-- UI GRID -->
+                <div id="grid1" ui-grid="{ data: sessionTableData }" class="grid" ui-grid-auto-resize></div>
+            </div>
+        </div>
+    </div>
 </div>
 
 </body>
