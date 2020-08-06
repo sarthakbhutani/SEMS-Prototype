@@ -1,20 +1,22 @@
 package com.scgj.config;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Component;
 
-//@Component
-//@ConfigurationProperties(prefix="viewTrainingQuery",value="classpath:sql/viewTraining.yml") //CHANGE THIS TO locations? 
-// https://github.com/spring-projects/spring-boot/issues/6726
+//in yml add comment #earliest enrollable, longest course
 
 @Component
 @ConfigurationProperties(prefix="viewTrainingQuery")
-//@Configuration("viewTrainingQuery")
+
 @PropertySource("classpath:sql/viewTraining.yml")
 public class ViewTrainingConfig {
-
+	@Value("${TrainingInfo}") //used with configuration properties
 	private String TrainingInfo;
+	
+	@Value("${TrainingSessionInfoById}")
 	private String TrainingSessionInfoById;
 	public String getTrainingInfo() {
 		return TrainingInfo;

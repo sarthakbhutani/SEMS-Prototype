@@ -1,11 +1,16 @@
 package com.scgj.dao;
 
+import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.jdbc.core.RowMapper;
@@ -19,10 +24,12 @@ import com.scgj.dto.ViewTrainingSessionDetailsDto;
 @Repository
 public class ViewTrainingDao extends AbstractTransactionalDao{
 	
+	private static final Logger LOGGER = LoggerFactory.getLogger(ViewTrainingDao.class);
+	
 	@Autowired
 	ViewTrainingConfig viewTrainingConfig;
 
-	class ViewTrainingDetailsRowMapper implements RowMapper<ViewTrainingDetailsDto>{
+		class ViewTrainingDetailsRowMapper implements RowMapper<ViewTrainingDetailsDto>{
 		
 		@Override
 		public ViewTrainingDetailsDto mapRow(ResultSet rs, int rowNum) throws SQLException{
@@ -30,25 +37,36 @@ public class ViewTrainingDao extends AbstractTransactionalDao{
 				String courseImg=rs.getString("courseImg");
 				String courseName=rs.getString("courseName");
 				String instructorName=rs.getString("instructorName");
-				String courseStartDate=rs.getString("courseStartDate"); //   DATE -> STRING FORMAT
-				String courseEndDate=rs.getString("courseEndDate");
+				Date courseStartDateObj =rs.getDate("courseStartDate");
+				Date courseEndDateObj =rs.getDate("courseEndDate");
 				String shortDescription=rs.getString("shortDescription");
 				int coursePrice=rs.getInt("coursePrice");
 				String longDescription=rs.getString("longDescription");
-				String assesmentDate=rs.getString("assesmentDate");
+				Date assesmentDateObj=rs.getDate("assesmentDate");
+				
+				//Formatting Date Obj to Req. String
+				String courseStartDate = dateToString(courseStartDateObj);
+				String courseEndDate = dateToString(courseEndDateObj);
+				String assesmentDate = dateToString(assesmentDateObj);
 				return new ViewTrainingDetailsDto(courseId,courseImg,courseName,instructorName,courseStartDate,courseEndDate,shortDescription,coursePrice,longDescription,assesmentDate);
 		}
 		
 	}
 	
-	class ViewTrainingSessionDetailsRowMapper implements RowMapper<ViewTrainingSessionDetailsDto>{
+		class ViewTrainingSessionDetailsRowMapper implements RowMapper<ViewTrainingSessionDetailsDto>{
 
 		@Override
 		public ViewTrainingSessionDetailsDto mapRow(ResultSet rs, int rowNum) throws SQLException {
 			String sessionName = rs.getString("sessionName");
-			String sessionStartTime = rs.getString("sessionStartTime");
-			String sessionEndTime = rs.getString("sessionEndTime");
-			return new ViewTrainingSessionDetailsDto(sessionName,sessionStartTime, sessionEndTime);
+			Timestamp sessionStartTimestamp = rs.getTimestamp("sessionStartTime");
+			Timestamp sessionEndTimestamp = rs.getTimestamp("sessionEndTime");
+
+			//Processing Time & Date to Req. String
+			Date sessionDateObj = new Date(sessionStartTimestamp.getTime());
+			String sessionDate = dateToString(sessionDateObj);
+			String sessionStartTime = TimestampToTime(sessionStartTimestamp);
+			String sessionEndTime = TimestampToTime(sessionEndTimestamp);
+			return new ViewTrainingSessionDetailsDto(sessionName, sessionDate, sessionStartTime, sessionEndTime);
 		}
 		
 	}
@@ -58,17 +76,30 @@ public class ViewTrainingDao extends AbstractTransactionalDao{
 		System.out.println("in here - dao");
 		Map<String,Object> parameters = new HashMap<>();
 		System.out.println("DAO QUERY"+ viewTrainingConfig.getTrainingInfo());
-		return getJdbcTemplate().query("SELECT courses.course_id as courseId, courses.course_img AS courseImg, courses.course_name AS courseName, courses.course_start_date AS courseStartDate, courses.course_end_date AS courseEndDate, courses.short_description AS shortDescription, courses.course_price AS coursePrice, instructors.instructor_name AS instructorName, courses.long_description AS longDescription, courses.assesment_date as assesmentDate  FROM courses INNER JOIN instructors on courses.instructor_id = instructors.instructor_id;\r\n" ,new ViewTrainingDetailsRowMapper());
+		return getJdbcTemplate().query(viewTrainingConfig.getTrainingInfo() ,new ViewTrainingDetailsRowMapper());
 	}
 	
 	public Collection<ViewTrainingSessionDetailsDto> getTrainingSessionDetailsByIdDao(int courseId){
 		HashMap<String,Integer> parameters = new HashMap<>();
 		parameters.put("courseId",courseId);
 		System.out.println("DAO QUERY"+ viewTrainingConfig.getTrainingSessionInfoById());
-		return getJdbcTemplate().query("SELECT session_name AS sessionName, session_start_time AS sessionStartTime, session_end_time AS sessionEndTime FROM session_details WHERE course_id = :courseId;", parameters, new ViewTrainingSessionDetailsRowMapper());
+		return getJdbcTemplate().query(viewTrainingConfig.getTrainingSessionInfoById(), parameters, new ViewTrainingSessionDetailsRowMapper());
 		
 	}
 	
+	public String dateToString(Date date) {
+		SimpleDateFormat formatter = new SimpleDateFormat("dd MMMM yyyy");
+		String strDate = formatter.format(date);
+		return strDate;
+	}
+	
+	
+	public String TimestampToTime(Timestamp ts) {
+		Date date = new Date(ts.getTime());
+		SimpleDateFormat formatter = new SimpleDateFormat("hh:mm");
+		String strTime = formatter.format(date);
+		return strTime;
+	}
 }
 
 

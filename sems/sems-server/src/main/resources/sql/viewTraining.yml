@@ -1,6 +1,9 @@
 viewTrainingQuery:
- TrainingInfo: >
-  SELECT courses.course_id as courseId, courses.course_img AS courseImg, courses.course_name AS courseName, courses.course_start_date AS courseStartDate, courses.course_end_date AS courseEndDate, courses.short_description AS shortDescription, courses.course_price AS coursePrice, instructors.instructor_name AS instructorName, courses.long_description AS longDescription, courses.assesment_date as assesmentDate  FROM courses INNER JOIN instructors on courses.instructor_id = instructors.instructor_id;
 
- TrainingSessionInfoById: >
-  SELECT session_name AS sessionName, session_start_time AS sessionStartTime, session_end_time AS sessionEndTime FROM session_details WHERE course_id = :courseId;
+#fetching courses based on earliest enrollable, longest course
+ TrainingInfo: SELECT courses.course_id as courseId, courses.course_img AS courseImg, courses.course_name AS courseName, courses.course_start_date AS courseStartDate, courses.course_end_date AS courseEndDate, courses.short_description AS shortDescription, courses.course_price AS coursePrice, instructors.instructor_name AS instructorName, courses.long_description AS longDescription, courses.assesment_date as assesmentDate  FROM courses INNER JOIN instructors on courses.instructor_id = instructors.instructor_id ORDER BY course_start_date ASC, course_end_date DESC;
+
+#fetching Session List for a course
+ TrainingSessionInfoById: SELECT session_name AS sessionName, session_start_time AS sessionStartTime, session_end_time AS sessionEndTime FROM session_details WHERE course_id = :courseId;
+ 
+# : > yaml syntax was not working: While fetching the query, it used to fetch " >" instead of the query at the next line defying the yaml syntax

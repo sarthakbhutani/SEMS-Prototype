@@ -89,12 +89,13 @@ h3.carouselData{
   position: relative;
 }
 .trendingOverlay{
-    background-color: #e96100;
+	border-radius: 0 10rem 10rem 0;
     position: absolute;
     left: 0rem;
     color: white;
     width: 10rem;
     padding: 0.7rem 2rem;
+    background-color: #fc4f4f;
 }
 .customThumbnailImg{
   display: block;

@@ -7,6 +7,7 @@ public class ViewTrainingSessionDetailsDto extends BaseDto{
 	private String sessionName;
 	private String sessionStartTime;
 	private String sessionEndTime;
+	private String sessionDate;
 	public String getSessionName() {
 		return sessionName;
 	}
@@ -25,14 +26,20 @@ public class ViewTrainingSessionDetailsDto extends BaseDto{
 	public void setSessionEndTime(String sessionEndTime) {
 		this.sessionEndTime = sessionEndTime;
 	}
-	
+	public String getSessionDate() {
+		return sessionDate;
+	}
+	public void setSessionDate(String sessionDate) {
+		this.sessionDate = sessionDate;
+	}
+
 	public ViewTrainingSessionDetailsDto() {
 		super();
 	}
-	
-	public ViewTrainingSessionDetailsDto(String sessionName,String sessionStartTime,String sessionEndTime) {
+	public ViewTrainingSessionDetailsDto(String sessionName,String sessionDate,String sessionStartTime,String sessionEndTime) {
 		super();
 		this.sessionName=sessionName;
+		this.sessionDate=sessionDate;
 		this.sessionStartTime=sessionStartTime;
 		this.sessionEndTime=sessionEndTime;
 	}
