@@ -1,0 +1,12 @@
+sems/.project
+sems/.settings/
+sems/sems-common/.classpath
+sems/sems-common/.project
+sems/sems-common/.settings/
+sems/sems-common/.sts4-cache/
+sems/sems-common/target/
+sems/sems-server/.classpath
+sems/sems-server/.project
+sems/sems-server/.settings/
+sems/sems-server/.sts4-cache/
+sems/sems-server/target/

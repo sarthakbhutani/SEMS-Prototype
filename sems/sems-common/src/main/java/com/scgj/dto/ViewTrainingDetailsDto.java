@@ -13,12 +13,12 @@ public class ViewTrainingDetailsDto extends BaseDto{
 	  private int courseId;
 	  private String longDescription;
 	  private String assesmentDate;
-	  
+	  private String[] category;
 	public ViewTrainingDetailsDto() {
 		super();
 	}
 	public ViewTrainingDetailsDto(int courseId, String courseImg, String courseName, String instructorName,
-			String courseStartDate, String courseEndDate, String shortDescription, int coursePrice, String longDescription, String assesmentDate) {
+			String courseStartDate, String courseEndDate, String shortDescription, int coursePrice, String longDescription, String assesmentDate, String[] category) {
 		super();
 		this.courseId=courseId;
 		this.courseImg = courseImg;
@@ -30,6 +30,7 @@ public class ViewTrainingDetailsDto extends BaseDto{
 		this.coursePrice = coursePrice;
 		this.longDescription=longDescription;
 		this.assesmentDate=assesmentDate;
+		this.category = category;
 	}
 	public String getCourseImg() {
 		return courseImg;
@@ -90,5 +91,11 @@ public class ViewTrainingDetailsDto extends BaseDto{
 	}
 	public void setAssesmentDate(String assesmentDate) {
 		this.assesmentDate = assesmentDate;
+	}
+	public String[] getCategory() {
+		return category;
+	}
+	public void setCategory(String[] category) {
+		this.category = category;
 	}
 }

@@ -75,10 +75,9 @@
 
 <!-- inline-block Filters -->
 <div class="parent">
-<select ng-model="selectedCategory" class="filter category">
-<option value="" selected disabled> Select Category </option> <!--  Show All Categories -->
+<select ng-model="selectedCategory" class="filter category" ng-options="i for i in categoryList">
+<option value="" selected> Select Category </option> <!--  Show All Categories -->
 </select>
-<option value="" selected disabled> Select Category </option> <!--  Show All Categories -->
 </select>
 <select ng-model="selectedCourse" class="filter trainer" ng-options="i.instructorName for i in courseList">
 <option value="" selected>Select Trainer</option>    <!--  Show All Trainers -->
@@ -87,7 +86,7 @@
 
     <div class="containerCourses">
         <!-- MAIN BOX COMING    ng-repeat-->
-        <div class="customThumbnail" ng-repeat="i in courseList | trainerFilter : selectedCourse.instructorName ">  
+        <div class="customThumbnail" ng-repeat="i in courseList | trainerFilter : selectedCourse.instructorName | categoryFilter : selectedCategory">  
             <span class="trendingOverlay">Trending</span>
             <img ng-src="{{i.courseImg}}" alt="thumbnail image" class="customThumbnailImg">
             <h4 class="courseHeading">{{i.courseName}}</h4>
@@ -107,7 +106,7 @@
     
     
 <!-- MODAL BOX -->
-<div class="modal fade" role="dialog" id="myModal">
+<div class="modal fade" role="dialog">
     <div class="modal-dialog modal-lg">
         <!-- Modal content-->
         <div class="modal-content">

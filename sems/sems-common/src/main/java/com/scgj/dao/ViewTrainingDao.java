@@ -1,5 +1,6 @@
 package com.scgj.dao;
 
+import java.sql.Array;
 import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -42,13 +43,17 @@ public class ViewTrainingDao extends AbstractTransactionalDao{
 				String shortDescription=rs.getString("shortDescription");
 				int coursePrice=rs.getInt("coursePrice");
 				String longDescription=rs.getString("longDescription");
-				Date assesmentDateObj=rs.getDate("assesmentDate");
+				Date assesmentDateObj=rs.getDate("assesmentDate");				
+				String categoryString = rs.getString("course_category");
 				
+				//Converting Courses : String -> Array
+				String[] category = (String[])categoryString.split(", ");
+
 				//Formatting Date Obj to Req. String
 				String courseStartDate = dateToString(courseStartDateObj);
 				String courseEndDate = dateToString(courseEndDateObj);
 				String assesmentDate = dateToString(assesmentDateObj);
-				return new ViewTrainingDetailsDto(courseId,courseImg,courseName,instructorName,courseStartDate,courseEndDate,shortDescription,coursePrice,longDescription,assesmentDate);
+				return new ViewTrainingDetailsDto(courseId,courseImg,courseName,instructorName,courseStartDate,courseEndDate,shortDescription,coursePrice,longDescription,assesmentDate, category);
 		}
 		
 	}
