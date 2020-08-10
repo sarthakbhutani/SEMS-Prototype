@@ -73,6 +73,16 @@
         <hr id="break">
     </div>
 
+
+
+
+
+
+
+
+  <div ui-grid="{ data: sessionTableData }" class="myGrid" ui-grid-auto-resize></div>
+              
+
 <!-- inline-block Filters -->
 <div class="parent">
 <select ng-model="selectedCategory" class="filter category" ng-options="i for i in categoryList">
@@ -86,7 +96,7 @@
 
     <div class="containerCourses">
         <!-- MAIN BOX COMING    ng-repeat-->
-        <div class="customThumbnail" ng-repeat="i in courseList | trainerFilter : selectedCourse.instructorName | categoryFilter : selectedCategory">  
+        <div class="customThumbnail" ng-repeat="i in courseList | trainerFilter : selectedCourse.instructorName ">  
             <span class="trendingOverlay">Trending</span>
             <img ng-src="{{i.courseImg}}" alt="thumbnail image" class="customThumbnailImg">
             <h4 class="courseHeading">{{i.courseName}}</h4>
@@ -106,27 +116,27 @@
     
     
 <!-- MODAL BOX -->
-<div class="modal fade" role="dialog">
+<div class="modal fade" role="dialog" id="myModal">
     <div class="modal-dialog modal-lg">
         <!-- Modal content-->
-        <div class="modal-content">
+        <div class="modal-content" >
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
+<!--                 <button type="button" class="close" data-dismiss="modal">&times;</button>
                 <!-- DATA HERE -->
-                <div class="modalHeader">
-                    <h3 class="blue">{{modalSessionData.courseName}}</h3>
+                <div class="modalData">
+                    <h3 class="blue bold heading">{{modalSessionData.courseName}}</h3>
                     <p class="bold"> Description - <span> {{modalSessionData.longDescription}} </span> </p>
                     <p class="bold"> Training Duration - <span> {{modalSessionData.presentationStartDate}} to
                             {{modalSessionData.presentationEndDate}} </span> </p>
                     <p class="bold"> Assesment Date - <span> {{modalSessionData.assesmentDate}} </span> </p>
-                    <p class="bold"> Cost - <span> {{modalSessionData.coursePrice}} </span> </p>
+                    <p class="bold"> Cost - <span> {{modalSessionData.coursePrice}} </span> INR</p>
                     <br>
-                    <h3 class="blue">Session Information</h3>
-                </div>
+                    <h3 class="blue bold heading">Session Information</h3>
                 <!-- UI GRID -->
-                <div id="grid1" ui-grid="{ data: sessionTableData }" class="grid" ui-grid-auto-resize></div>
+             <!--    <div id="grid1" ui-grid="{ data: sessionTableData }" ui-grid-auto-resize></div>  -->
                 <span>{{errorMsg}}</span>
             </div>
+                            </div>
         </div>
     </div>
 </div>

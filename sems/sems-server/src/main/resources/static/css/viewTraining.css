@@ -144,7 +144,7 @@ h3.carouselData{
 }
 
 .blue{
-	color : blue;
+	color: #2e75b6;
 }
 
 .bold > span {
@@ -171,13 +171,39 @@ h3.carouselData{
 .itemMain{
 	background: #eaeaea;
 }
-/*
-#myModal{
-	width: 115rem;
+
+.modalData > .bold{
+	font-size: 1.6rem;
+    margin: 2rem 0;
+}
+.modalData > .heading{
+	font-size: 2.6rem;	
+}
+.modalData{
+	 margin: 0 1rem;
+}
+
+.modal {
+  text-align: center;
+  padding: 0!important;
+}
+
+.modal:before {
+  content: '';
+  display: inline-block;
+  height: 100%;
+  vertical-align: middle;
+  margin-right: -4px; /* Adjusts for spacing */
+}
+
+.modal-dialog {
+  display: inline-block;
+  text-align: left;
+  vertical-align: middle;
+  width: 130rem;
 }
 
 .myGrid {
-    width: 500px;
-    height: 250px;
-  }
-  */
+
+    max-height:20rem;
+}

@@ -1,3 +1,5 @@
+//why sessionStartTme instead of sessionStartTime in CUSTOM COURSE REQUEST
+//sessionGrid 
 
 var myApp = angular.module("app");
 
@@ -45,6 +47,7 @@ myApp.filter("categoryFilter", function () {
 	  };
 	});
 
+
 myApp.controller("viewTrainingController", function ($scope, $http) {
   $http.get("/getAllCourses").then(function (response) {
     if (response.data == null) {
@@ -55,6 +58,7 @@ myApp.controller("viewTrainingController", function ($scope, $http) {
     }
   });
   
+//  $scope.sessionGrid.data = [];
   let fillCategories = function(){
 	  console.log("filling categories");
 	  var courseList =  $scope.courseList;
@@ -67,15 +71,13 @@ myApp.controller("viewTrainingController", function ($scope, $http) {
 		  }
 	  }
 	  $scope.categoryList = categoryList;
-	  console.log("filled categoryList");
-	  console.log(categoryList);
+
   }
   
 
   //ng-click trigger
   $scope.populateModal = function (courseId, courselist) {
     console.log("in FE : populateModal() with courseId" + courseId);
-
     $http
       .get("/getCourseSession?courseId=" + courseId)
       .then(function (response) {
@@ -85,10 +87,13 @@ myApp.controller("viewTrainingController", function ($scope, $http) {
           //populate ui-grid
           $scope.errorMsg = "Loading data : takes time to fill the grid";
           sessionDetails = response.data;
+          console.log("session Details");
           console.log(sessionDetails);
 
           //NEEDS TO BE CHANGED, another function to be called => to manipulate the grid items or in last like UploadDoc....
-          $scope.sessionTableData = sessionDetails;
+          $scope.sessionTableData = sanatiseGrid(sessionDetails);
+
+//          $scope.sessionGrid.data = sanatiseGrid(sessionDetails);
         }
 
         var courseName,
@@ -121,7 +126,57 @@ myApp.controller("viewTrainingController", function ($scope, $http) {
         };
       });
   };
+  
+  function sanatiseGrid(sessionDetails){
+	  var sessionTableData = [];
+	  for(i of sessionDetails){
+		  var obj={};
+		  obj.session=i.sessionName;
+		  obj.sessionDate = i.sessionDate;
+		  console.log(i.sessionStartTme);
+		  obj.SessionTime =i.sessionStartTme  + " - " + i.sessionEndTime + " (IST)";
+		  sessionTableData.push(obj);
+	  }
+	  return sessionTableData;
+	  console.log("in Sanatise Grid fn");
+	  console.log(sessionTableData);
+  }
 
+//  FIELDS FOR GRID : NEEDS FILTERING
+//	private String sessionName;
+//	private String sessionStartTime;
+//	private String sessionEndTime;
+//	private String sessionDate;
+  
+  //
 
   //	ui-grid properties : remove table names
+//  $scope.sessionGrid = {
+//			enableGridMenus: false,
+//			enableSorting: false,
+//			enableFiltering: false,
+//			enableCellEdit: false,
+//			enableColumnMenus: false,
+//			enableVerticalScrollbar: 0,
+//		    columnDefs: [
+//	             {
+//           	 name: 'sessionName',  width: '35%', 
+//           	 displayName: 'Session'
+//            },
+//            {
+//           	 name: 'sessionDate', width: '30%', 
+//           	 displayName: 'Session Date'
+//            },
+//            {
+//           	 name: 'sessionStartTime', width: '35%', 
+//           	 displayName: 'Session Time',
+//           	 cellTemplate: '<img src="images/snb_logo.png">'
+//            }
+//            ]
+//		    ,onRegisterApi: function( gridApi ) { 
+//		      $scope.gridApi = gridApi;
+//		      var cellTemplate = 'ui-grid/selectionRowHeader';   // you could use your own template here
+//		      $scope.gridApi.core.addRowHeaderColumn( { name: 'rowHeaderCol', displayName: '', width: 30, cellTemplate: cellTemplate} );
+//  }
+  
 });
