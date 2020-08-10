@@ -2,8 +2,10 @@ package com.scgj.dto;
 
 import com.scgj.common.BaseDto;
 
+/**
+* @Description POJO class for fetching session details for course
+*/
 public class ViewTrainingSessionDetailsDto extends BaseDto{
-//fetch only session details via courseID
 	private String sessionName;
 	private String sessionStartTime;
 	private String sessionEndTime;

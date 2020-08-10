@@ -23,42 +23,49 @@ import com.scgj.dto.ViewTrainingDetailsDto;
 import com.scgj.dto.ViewTrainingSessionDetailsDto;
 
 @Repository
-public class ViewTrainingDao extends AbstractTransactionalDao{
-	
+public class ViewTrainingDao extends AbstractTransactionalDao {
+
 	private static final Logger LOGGER = LoggerFactory.getLogger(ViewTrainingDao.class);
-	
+
 	@Autowired
 	ViewTrainingConfig viewTrainingConfig;
 
-		class ViewTrainingDetailsRowMapper implements RowMapper<ViewTrainingDetailsDto>{
-		
-		@Override
-		public ViewTrainingDetailsDto mapRow(ResultSet rs, int rowNum) throws SQLException{
-				int courseId=rs.getInt("courseId");
-				String courseImg=rs.getString("courseImg");
-				String courseName=rs.getString("courseName");
-				String instructorName=rs.getString("instructorName");
-				Date courseStartDateObj =rs.getDate("courseStartDate");
-				Date courseEndDateObj =rs.getDate("courseEndDate");
-				String shortDescription=rs.getString("shortDescription");
-				int coursePrice=rs.getInt("coursePrice");
-				String longDescription=rs.getString("longDescription");
-				Date assesmentDateObj=rs.getDate("assesmentDate");				
-				String categoryString = rs.getString("course_category");
-				
-				//Converting Courses : String -> Array
-				String[] category = (String[])categoryString.split(", ");
+	/**
+	 * @Description Row mapper for getting all course details
+	 *
+	 */
+	class ViewTrainingDetailsRowMapper implements RowMapper<ViewTrainingDetailsDto> {
 
-				//Formatting Date Obj to Req. String
-				String courseStartDate = dateToString(courseStartDateObj);
-				String courseEndDate = dateToString(courseEndDateObj);
-				String assesmentDate = dateToString(assesmentDateObj);
-				return new ViewTrainingDetailsDto(courseId,courseImg,courseName,instructorName,courseStartDate,courseEndDate,shortDescription,coursePrice,longDescription,assesmentDate, category);
+		@Override
+		public ViewTrainingDetailsDto mapRow(ResultSet rs, int rowNum) throws SQLException {
+			int courseId = rs.getInt("courseId");
+			String courseImg = rs.getString("courseImg");
+			String courseName = rs.getString("courseName");
+			String instructorName = rs.getString("instructorName");
+			Date courseStartDateObj = rs.getDate("courseStartDate");
+			Date courseEndDateObj = rs.getDate("courseEndDate");
+			String shortDescription = rs.getString("shortDescription");
+			int coursePrice = rs.getInt("coursePrice");
+			String longDescription = rs.getString("longDescription");
+			Date assesmentDateObj = rs.getDate("assesmentDate");
+			String categoryString = rs.getString("course_category");
+
+			//Converting Courses : String -> Array
+			String[] category = (String[]) categoryString.split(", ");
+			//Formatting Date Obj to Req. String
+			String courseStartDate = dateToString(courseStartDateObj);
+			String courseEndDate = dateToString(courseEndDateObj);
+			String assesmentDate = dateToString(assesmentDateObj);
+			return new ViewTrainingDetailsDto(courseId, courseImg, courseName, instructorName, courseStartDate, courseEndDate, shortDescription, coursePrice, longDescription, assesmentDate, category);
 		}
-		
+
 	}
-	
-		class ViewTrainingSessionDetailsRowMapper implements RowMapper<ViewTrainingSessionDetailsDto>{
+
+	/**
+	 * @Description Row mapper for getting session details for course by CourseId
+	 *
+	 */
+	class ViewTrainingSessionDetailsRowMapper implements RowMapper<ViewTrainingSessionDetailsDto> {
 
 		@Override
 		public ViewTrainingSessionDetailsDto mapRow(ResultSet rs, int rowNum) throws SQLException {
@@ -73,38 +80,77 @@ public class ViewTrainingDao extends AbstractTransactionalDao{
 			String sessionEndTime = TimestampToTime(sessionEndTimestamp);
 			return new ViewTrainingSessionDetailsDto(sessionName, sessionDate, sessionStartTime, sessionEndTime);
 		}
-		
 	}
 
+	/**
+	 * @return Collection of all course details
+	 * @Description Fetching all courses details
+	 */
+	public Collection<ViewTrainingDetailsDto> getTrainingDetailsDao() {
+		LOGGER.debug("Request Recieved from Service");
+		LOGGER.debug("In getTrainingDetailsDao - to get all course details");
+		try {
+			LOGGER.debug("TRYING -- To get all course details");
+			LOGGER.debug("Executing QUERY to get all course details");
+			return getJdbcTemplate().query(viewTrainingConfig.getTrainingInfo(), new ViewTrainingDetailsRowMapper());
+		} catch (Exception e) {
+			LOGGER.error("CATCHING -- Exception handled while getting all course details");
+			LOGGER.error("In ViewTrainingDao - getTrainingDetailsDao");
+			LOGGER.error("Exception is :" + e);
+			LOGGER.error("Returning NULL");
+			return null;
+		}
+	}
 
-	public Collection<ViewTrainingDetailsDto> getTrainingDetailsDao(){
-		System.out.println("in here - dao");
-		Map<String,Object> parameters = new HashMap<>();
-		System.out.println("DAO QUERY"+ viewTrainingConfig.getTrainingInfo());
-		return getJdbcTemplate().query(viewTrainingConfig.getTrainingInfo() ,new ViewTrainingDetailsRowMapper());
+	/**
+	 * @params courseId
+	 * @return Collection of all session details
+	 * @Description Fetching Collection of all session details for courseId
+	 */
+	public Collection<ViewTrainingSessionDetailsDto> getTrainingSessionDetailsByIdDao(int courseId) {
+		LOGGER.debug("Request Recieved from Service");
+		LOGGER.debug("In getTrainingSessionDetailsByIdDao - to get all session details for courseId :" + courseId);
+		try {
+			LOGGER.debug("TRYING -- To get all session details by courseId :" + courseId);
+			LOGGER.debug("Creating HashMap<String,Integer> of params");
+			HashMap<String, Integer> parameters = new HashMap<>();
+			LOGGER.debug("Inserting value in HashMap");
+			parameters.put("courseId", courseId);
+			LOGGER.debug("Executing QUERY - To get all session details by courseId :" + courseId);
+			return getJdbcTemplate().query(viewTrainingConfig.getTrainingSessionInfoById(), parameters, new ViewTrainingSessionDetailsRowMapper());
+		} catch (Exception e) {
+			LOGGER.error("CATCHING -- Exception handled while session details by courseId:" + courseId);
+			LOGGER.error("In ViewTrainingDao - getTrainingSessionDetailsByIdDao");
+			LOGGER.error("Exception is :" + e);
+			LOGGER.error("Returning NULL");
+			return null;
+		}
 	}
-	
-	public Collection<ViewTrainingSessionDetailsDto> getTrainingSessionDetailsByIdDao(int courseId){
-		HashMap<String,Integer> parameters = new HashMap<>();
-		parameters.put("courseId",courseId);
-		System.out.println("DAO QUERY"+ viewTrainingConfig.getTrainingSessionInfoById());
-		return getJdbcTemplate().query(viewTrainingConfig.getTrainingSessionInfoById(), parameters, new ViewTrainingSessionDetailsRowMapper());
-		
-	}
-	
-	public String dateToString(Date date) {
+
+	/**
+	 * @params Date
+	 * @return String of date
+	 * @Description Converts date obj into DD MM YYYY String
+	 */
+	private String dateToString(Date date) {
+		LOGGER.debug("RowMapper VARIABLE DECLARATION");
+		LOGGER.debug("RowMapper => dateToString Method VARIABLE DECLARATION");
 		SimpleDateFormat formatter = new SimpleDateFormat("dd MMMM yyyy");
 		String strDate = formatter.format(date);
 		return strDate;
 	}
-	
-	
-	public String TimestampToTime(Timestamp ts) {
+
+	/**
+	 * @params Timestamp
+	 * @return String of time
+	 * @Description Converts Timestamp obj into HH:MM String
+	 */
+	private String TimestampToTime(Timestamp ts) {
+		LOGGER.debug("RowMapper VARIABLE DECLARATION");
+		LOGGER.debug("RowMapper => TimestampToTime Method VARIABLE DECLARATION");
 		Date date = new Date(ts.getTime());
 		SimpleDateFormat formatter = new SimpleDateFormat("hh:mm");
 		String strTime = formatter.format(date);
 		return strTime;
 	}
 }
-
-

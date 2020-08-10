@@ -2,6 +2,9 @@ package com.scgj.dto;
 
 import com.scgj.common.BaseDto;
 
+/**
+* @Description POJO class for fetching course Details
+*/
 public class ViewTrainingDetailsDto extends BaseDto{
 	  private String courseImg;
 	  private String courseName;
