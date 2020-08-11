@@ -1,5 +1,3 @@
-//why sessionStartTme instead of sessionStartTime in CUSTOM COURSE REQUEST
-//sessionGrid 
 
 var myApp = angular.module("app");
 
@@ -49,6 +47,7 @@ myApp.filter("categoryFilter", function () {
 
 
 myApp.controller("viewTrainingController", function ($scope, $http) {
+	
   $http.get("/getAllCourses").then(function (response) {
     if (response.data == null) {
       $scope.courseList = [];
@@ -58,9 +57,57 @@ myApp.controller("viewTrainingController", function ($scope, $http) {
     }
   });
   
-//  $scope.sessionGrid.data = [];
+  function sanatizeTime(timeStr){
+		var firstChar = timeStr.slice(0,1);
+		var firstTwoChar = timeStr.slice(0,2);
+		if(firstTwoChar=='11' || firstTwoChar =='24'){
+			timeStr = timeStr + " AM";
+		}else if(firstChar=='2' || (firstChar=='1' && firstTwoChar !='11')){
+			if(firstTwoChar='13'){
+				firstTwoChar="1";
+			}else if(firstTwoChar='13'){
+				firstTwoChar="1";
+			}else if(firstTwoChar='14'){
+				firstTwoChar="2";
+			}else if(firstTwoChar='15'){
+				firstTwoChar="3";
+			}else if(firstTwoChar='16'){
+				firstTwoChar="4";
+			}else if(firstTwoChar='17'){
+				firstTwoChar="5";
+			}else if(firstTwoChar='18'){
+				firstTwoChar="6";
+			}else if(firstTwoChar='19'){
+				firstTwoChar="7";
+			}else if(firstTwoChar='20'){
+				firstTwoChar="8";
+			}else if(firstTwoChar='21'){
+				firstTwoChar="9";
+			}else if(firstTwoChar='22'){
+				firstTwoChar="10";
+			}else if(firstTwoChar='23'){
+				firstTwoChar="11";
+			}
+			timeStr=firstTwoChar + timeStr.slice(2) + " PM";
+		}else if(firstChar === '0'){ 
+			timeStr = " " + timeStr.slice(1) + " AM";
+		}
+		return timeStr;
+	}
+  
+  
+  
+  
+  //not working : show dateElement as undefined (removed from html now)
+  $scope.sanatizeDate = function(){
+	  //runOnlyOneTime
+	  var str = $scope.dateElement;
+	  str = str + '<span class="dateDecoration">th</span>';
+	  console.log(str);
+	  $scope.dateElement = str;
+  }
+  
   let fillCategories = function(){
-	  console.log("filling categories");
 	  var courseList =  $scope.courseList;
 	  var categoryList = [];
 	  for(i of courseList){
@@ -86,14 +133,14 @@ myApp.controller("viewTrainingController", function ($scope, $http) {
         } else {
           //populate ui-grid
           $scope.errorMsg = "Loading data : takes time to fill the grid";
+          $scope.successMsg = "Success";
           sessionDetails = response.data;
           console.log("session Details");
           console.log(sessionDetails);
 
-          //NEEDS TO BE CHANGED, another function to be called => to manipulate the grid items or in last like UploadDoc....
+          //manipulating grid data
           $scope.sessionTableData = sanatiseGrid(sessionDetails);
 
-//          $scope.sessionGrid.data = sanatiseGrid(sessionDetails);
         }
 
         var courseName,
@@ -134,49 +181,19 @@ myApp.controller("viewTrainingController", function ($scope, $http) {
 		  obj.session=i.sessionName;
 		  obj.sessionDate = i.sessionDate;
 		  console.log(i.sessionStartTme);
-		  obj.SessionTime =i.sessionStartTme  + " - " + i.sessionEndTime + " (IST)";
+		  obj.SessionTime =sanatizeTime(i.sessionStartTme)  + " - " + sanatizeTime(i.sessionEndTime) + " (IST)";
 		  sessionTableData.push(obj);
 	  }
+	//ui grid may taks time to render, that's why showing the result in console
+	  
+	  console.log("ui grid may taks time to render, that's why showing the result in console");
+			  console.log(sessionTableData);
 	  return sessionTableData;
-	  console.log("in Sanatise Grid fn");
-	  console.log(sessionTableData);
   }
 
-//  FIELDS FOR GRID : NEEDS FILTERING
-//	private String sessionName;
-//	private String sessionStartTime;
-//	private String sessionEndTime;
-//	private String sessionDate;
-  
-  //
 
-  //	ui-grid properties : remove table names
-//  $scope.sessionGrid = {
-//			enableGridMenus: false,
-//			enableSorting: false,
-//			enableFiltering: false,
-//			enableCellEdit: false,
-//			enableColumnMenus: false,
-//			enableVerticalScrollbar: 0,
-//		    columnDefs: [
-//	             {
-//           	 name: 'sessionName',  width: '35%', 
-//           	 displayName: 'Session'
-//            },
-//            {
-//           	 name: 'sessionDate', width: '30%', 
-//           	 displayName: 'Session Date'
-//            },
-//            {
-//           	 name: 'sessionStartTime', width: '35%', 
-//           	 displayName: 'Session Time',
-//           	 cellTemplate: '<img src="images/snb_logo.png">'
-//            }
-//            ]
-//		    ,onRegisterApi: function( gridApi ) { 
-//		      $scope.gridApi = gridApi;
-//		      var cellTemplate = 'ui-grid/selectionRowHeader';   // you could use your own template here
-//		      $scope.gridApi.core.addRowHeaderColumn( { name: 'rowHeaderCol', displayName: '', width: 30, cellTemplate: cellTemplate} );
-//  }
   
 });
+
+
+

@@ -1,85 +1,92 @@
-*, *:before, *:after {
+*,
+*:before,
+*:after {
     box-sizing: border-box;
-  }
+}
 
-#logo{
+#logo {
     width: 9%;
     margin: 1rem;
-  }
+}
 
-.navItem{
+.navItem {
     margin: 2rem;
     color: black;
     font-weight: bold;
-  }
-
-.navItem > span{
-	padding-right: 0.7rem;
 }
 
-.navBreak{
+.navItem>span {
+    padding-right: 0.7rem;
+}
+
+.navBreak {
     border-top: 1px solid #d7d2d2;
-    margin : 0;	
-}
-.container{
-  height : 10%;
-  width : 100%;
+    margin: 0;
 }
 
-.left-send{
-  text-align: left;
+.container {
+    height: 10%;
+    width: 100%;
 }
 
-.carouselData{
+.left-send {
+    text-align: left;
+}
+
+.carouselData {
     position: absolute;
     left: 4rem;
 }
 
-button.carouselData{
+button.carouselData {
     top: 22rem;
-    padding: 0.5rem 5rem;
-    border-radius: 0.7rem;
-    background-color: #640464;
+    padding: 0.4rem 4.3rem;
+    background-color: #240c84;
     color: white;
-    font-size: 1.7rem;
+    font-size: 1.8rem;
+    border-radius: 2rem;
 }
 
-h2.carouselData{
-	top: 4rem;
+h2.carouselData {
+    top: 4rem;
     font-weight: bold;
 }
 
-h3.carouselData{
+h3.carouselData {
     top: 10rem;
     width: 100rem;
 }
 
-.carouselImg{
-  position: relative;
-  max-height: 34rem;
+.carouselImg {
+    position: relative;
+    max-height: 34rem;
     width: auto;
     margin-left: 128rem;
 }
 
-#break{
-  margin-top: 0;
-  border-top: 1px solid black;
+#carouselWebinarImg {
+    margin-left: 100rem;
 }
 
-#upcomingTrainingH3{
-  margin-left: 4%;
-  font-weight : bold;
+#break {
+    margin-top: 0;
+    border-top: 1px solid black;
 }
 
-.containerCourses{
-  display: flex;
-  justify-content: start;
-  /* width: 20%; */
-  flex-wrap: wrap;
-  position: relative;
+#upcomingTrainingH3 {
+    margin-left: 4%;
+    font-weight: bold;
 }
 
-.customThumbnail{
+.containerCourses {
+    display: flex;
+    justify-content: start;
+    /* width: 20%; */
+    flex-wrap: wrap;
+    position: relative;
+}
+
+.customThumbnail {
     padding: 1rem;
     background-color: #fff;
     border: 2px solid darkgrey;
@@ -88,13 +95,14 @@ h3.carouselData{
     margin-left: 2%;
     margin-right: 6%;
     margin-bottom: 3rem;
-	/*box shadow
+    /*box shadow
     -webkit-box-shadow:0 0 0.4rem 0.1rem #777777e8;
     -moz-box-shadow: 0 0 0.4rem 0.1rem #777777e8;*/
     box-shadow: 0 0 0.4rem 0.1rem #777777e8;
 }
-.trendingOverlay{
-	border-radius: 0 10rem 10rem 0;
+
+.trendingOverlay {
+    border-radius: 0 10rem 10rem 0;
     position: absolute;
     left: 0;
     color: white;
@@ -102,35 +110,42 @@ h3.carouselData{
     padding: 0.7rem 2rem;
     background-color: #f44336;
 }
-.customThumbnailImg{
+
+.customThumbnailImg {
     display: block;
     width: 100%;
     max-height: 21rem;
 }
-.courseHeading{
-	font-weight: bold;
+
+.courseHeading {
+    font-weight: bold;
 }
-.courseDescription{
-	margin-top: 2rem;
+
+.courseDescription {
+    margin-top: 2rem;
 }
-.coursePrice{
-	font-weight: bold;
+
+.coursePrice {
+    font-weight: bold;
     font-size: 2.2rem;
 }
-.rupeeIcon{
-	margin-right: -1rem;
+
+.rupeeIcon {
+    margin-right: -1rem;
     height: 2.6rem;
 }
-#enrolBtn{
+
+#enrolBtn {
     position: relative;
     width: 11rem;
     bottom: 0;
     right: 3rem;
     background-color: #40a340;
     border-color: #40a340;
-    color:white;
+    color: white;
 }
-#viewDetailsBtn{
+
+#viewDetailsBtn {
     position: relative;
     width: 12rem;
     bottom: 0;
@@ -139,71 +154,85 @@ h3.carouselData{
     color: white;
     border-color: #007dfd;
 }
-.bold{
-	font-weight: 600;
+
+.bold {
+    font-weight: 600;
 }
 
-.blue{
-	color: #2e75b6;
+.blue {
+    color: #2e75b6;
 }
 
-.bold > span {
-	font-weight : 100;
+.bold>span {
+    font-weight: 100;
 }
 
-.filter{
-	padding: 0.6rem;
+.filter {
+    padding: 0.6rem;
     border-radius: 0.5rem;
     font-size: 1.5rem;
     border: 0.1rem solid black;
     margin-bottom: 3rem;
-   	display:inline-block;
-	width: 19rem;
-	    font-size: 1.6rem;
-}
-.trainer{
-	margin-left: 4rem;
-}
-.category{
-	margin-left: 136rem;
+    display: inline-block;
+    width: 19rem;
+    font-size: 1.6rem;
 }
 
-.itemMain{
-	background: #eaeaea;
+.trainer {
+    margin-left: 4rem;
 }
 
-.modalData > .bold{
-	font-size: 1.6rem;
+.category {
+    margin-left: 136rem;
+}
+
+.itemMain {
+    /*background: #eaeaea; //commented until carousel png without white background is found*/
+    background: white;
+}
+
+.itemWebinar {
+    background-color: #2daae0;
+}
+
+.modalData>.bold {
+    font-size: 1.6rem;
     margin: 2rem 0;
 }
-.modalData > .heading{
-	font-size: 2.6rem;	
+
+.modalData>.heading {
+    font-size: 2.6rem;
 }
-.modalData{
-	 margin: 0 1rem;
+
+.modalData {
+    margin: 0 1rem;
 }
 
 .modal {
-  text-align: center;
-  padding: 0!important;
+    text-align: center;
+    padding: 0 !important;
 }
 
 .modal:before {
-  content: '';
-  display: inline-block;
-  height: 100%;
-  vertical-align: middle;
-  margin-right: -4px; /* Adjusts for spacing */
+    content: '';
+    display: inline-block;
+    height: 100%;
+    vertical-align: middle;
+    margin-right: -4px;
+    /* Adjusts for spacing */
 }
 
 .modal-dialog {
-  display: inline-block;
-  text-align: left;
-  vertical-align: middle;
-  width: 130rem;
+    display: inline-block;
+    text-align: left;
+    vertical-align: middle;
+    width: 130rem;
 }
 
 .myGrid {
+    max-height: 20rem;
+}
 
-    max-height:20rem;
+.dateDecoration {
+    font-size: 0.2rem;
 }
